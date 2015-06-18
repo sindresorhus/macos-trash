@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Sindre Sorhus. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 int main(int argc, const char *argv[]) {
 	@autoreleasepool {
@@ -15,7 +15,7 @@ int main(int argc, const char *argv[]) {
 			return 1;
 		}
 
-		NSArray *args = [[NSProcessInfo processInfo] arguments];
+		NSArray *args = [NSProcessInfo processInfo].arguments;
 
 		if ([args[1] isEqualToString: @"--version"]) {
 			puts("1.0.0");
@@ -34,7 +34,7 @@ int main(int argc, const char *argv[]) {
 			NSURL *url = [NSURL fileURLWithPath:@(argv[i])];
 
 			if (![fm trashItemAtURL:url resultingItemURL:nil error:&err]) {
-				fprintf(stderr, "%s\n", [[err localizedDescription] UTF8String]);
+				fprintf(stderr, "%s\n", err.localizedDescription.UTF8String);
 				return 1;
 			}
 		}

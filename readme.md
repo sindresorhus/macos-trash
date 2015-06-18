@@ -4,7 +4,7 @@
 
 Supports [`Put Back`](http://mac-fusion.com/trash-tip-how-to-put-files-back-to-their-original-location/).
 
-Requires OS X 10.8 or higher.
+Requires OS X 10.8 or later.
 
 
 ## Install
@@ -14,7 +14,7 @@ Requires OS X 10.8 or higher.
 
 ## Usage
 
-```sh
+```
 $ trash file1 file2 ...
 ```
 

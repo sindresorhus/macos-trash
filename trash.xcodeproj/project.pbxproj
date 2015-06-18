@@ -78,7 +78,7 @@
 			dependencies = (
 			);
 			name = trash;
-			productName = "trash";
+			productName = trash;
 			productReference = E3A37ACE1A756109004002FD /* trash */;
 			productType = "com.apple.product-type.tool";
 		};
@@ -88,7 +88,7 @@
 		E3A37AC61A756109004002FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Sindre Sorhus";
 				TargetAttributes = {
 					E3A37ACD1A756109004002FD = {
@@ -144,6 +144,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -202,6 +203,9 @@
 		E3A37AD61A756109004002FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = trash;
 			};
 			name = Debug;
@@ -209,6 +213,9 @@
 		E3A37AD71A756109004002FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = trash;
 			};
 			name = Release;
