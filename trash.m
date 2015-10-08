@@ -1,5 +1,5 @@
 //
-//  main.m
+//  trash.m
 //  trash
 //
 //  Created by Sindre Sorhus on 26/01/15.
