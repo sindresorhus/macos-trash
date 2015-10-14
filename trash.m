@@ -18,7 +18,7 @@ int main(int argc, const char *argv[]) {
 		}
 
 		if (argc == 1) {
-			fputs("Please supply one or more filepaths\n", stderr);
+			fputs("Specify one or more paths\n", stderr);
 			return 1;
 		}
 
@@ -30,7 +30,7 @@ int main(int argc, const char *argv[]) {
 		}
 
 		if ([args[1] isEqualToString: @"--help"]) {
-			puts("Usage: trash filepath...\n\nCreated by Sindre Sorhus");
+			puts("Usage: trash <path> [...]\n\nCreated by Sindre Sorhus");
 			return 0;
 		}
 

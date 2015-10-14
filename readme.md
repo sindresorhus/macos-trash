@@ -1,6 +1,6 @@
 # osx-trash
 
-> Move files to the trash
+> Move files and folders to the trash
 
 Supports [`Put Back`](http://mac-fusion.com/trash-tip-how-to-put-files-back-to-their-original-location/).
 
@@ -15,7 +15,7 @@ Requires OS X 10.8 or later.
 ## Usage
 
 ```
-$ trash file1 file2 ...
+$ trash <path> [...]
 ```
 
 
@@ -28,7 +28,7 @@ $ ./build
 
 ## Related
 
-- [trash](https://github.com/sindresorhus/trash) - Move files to the trash, cross-platform
+- [trash](https://github.com/sindresorhus/trash) - Move files and folders to the trash, cross-platform
 
 
 ## License
