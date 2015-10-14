@@ -10,6 +10,13 @@
 
 int main(int argc, const char *argv[]) {
 	@autoreleasepool {
+		// revert back to original user if sudo
+		// ensuring the file is put in the users trash
+		const char *sudo_uid = getenv("SUDO_UID");
+		if (sudo_uid) {
+			setuid((uid_t)atoi(sudo_uid));
+		}
+
 		if (argc == 1) {
 			fputs("Please supply one or more filepaths\n", stderr);
 			return 1;
