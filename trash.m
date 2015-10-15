@@ -25,7 +25,7 @@ int main(int argc, const char *argv[]) {
 		NSArray *args = [NSProcessInfo processInfo].arguments;
 
 		if ([args[1] isEqualToString: @"--version"]) {
-			puts("1.0.0");
+			puts("1.1.0");
 			return 0;
 		}
 
