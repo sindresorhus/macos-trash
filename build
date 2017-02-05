@@ -1,5 +1,3 @@
 #!/usr/bin/env sh
 
-filename=trash
-
-clang $filename.m -fmodules -mmacosx-version-min=10.8 -o $filename
+clang trash.m -fmodules -mmacosx-version-min=10.8 -o trash

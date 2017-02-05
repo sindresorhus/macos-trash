@@ -4,7 +4,7 @@
 
 Supports [`Put Back`](http://mac-fusion.com/trash-tip-how-to-put-files-back-to-their-original-location/).
 
-Requires macOS 10.8 or later.
+*Requires macOS 10.8 or later.*
 
 
 ## Install
@@ -28,9 +28,9 @@ $ ./build
 
 ## Related
 
-- [trash](https://github.com/sindresorhus/trash) - Move files and folders to the trash, cross-platform
+- [trash](https://github.com/sindresorhus/trash) - Cross-platform Node.js version
 
 
 ## License
 
-MIT © [Sindre Sorhus](http://sindresorhus.com)
+MIT © [Sindre Sorhus](https://sindresorhus.com)
