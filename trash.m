@@ -2,15 +2,14 @@
 //  trash.m
 //  trash
 //
-//  Created by Sindre Sorhus on 26/01/15.
-//  Copyright (c) 2015 Sindre Sorhus. All rights reserved.
+//  Copyright © Sindre Sorhus
 //
 
 @import Foundation;
 
 int main(int argc, const char *argv[]) {
 	@autoreleasepool {
-		// revert back to original user if sudo
+		// Revert back to original user if sudo,
 		// ensuring the file is put in the users trash
 		const char *sudo_uid = getenv("SUDO_UID");
 		if (sudo_uid) {
