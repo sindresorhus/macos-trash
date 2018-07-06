@@ -1,3 +1,3 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
-clang trash.m -fmodules -mmacosx-version-min=10.8 -o trash
+swift build --configuration=release -Xswiftc -static-stdlib && mv .build/release/trash .
