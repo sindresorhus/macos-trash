@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
 	name: "trash",
 	platforms: [
-		.macOS(.v10_9)
+		.macOS(.v10_10)
 	],
 	targets: [
 		.target(
