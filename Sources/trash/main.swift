@@ -3,7 +3,7 @@ import Foundation
 let VERSION = "1.1.0"
 
 func trash(paths: [String]) {
-	// Ensures the user's trash is used
+	// Ensures the user's trash is used.
 	CLI.revertSudo()
 
 	for path in CLI.arguments {

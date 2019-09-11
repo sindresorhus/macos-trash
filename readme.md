@@ -32,8 +32,3 @@ $ ./build
 - [macos-wallpaper](https://github.com/sindresorhus/macos-wallpaper) - Manage the desktop wallpaper
 - [do-not-disturb](https://github.com/sindresorhus/do-not-disturb) - Control the macOS `Do Not Disturb` feature
 - [More…](https://github.com/search?q=user%3Asindresorhus+language%3Aswift)
-
-
-## License
-
-MIT © [Sindre Sorhus](https://sindresorhus.com)

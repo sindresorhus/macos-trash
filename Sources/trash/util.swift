@@ -13,7 +13,7 @@ struct CLI {
 
 	static let arguments = Array(CommandLine.arguments.dropFirst(1))
 
-	/// Execute code and print to `stderr` and exit with code 1 if it throws
+	/// Execute code and print to `stderr` and exit with code 1 if it throws.
 	static func tryOrExit(_ throwingFunc: () throws -> Void) {
 		do {
 			try throwingFunc()
@@ -23,7 +23,7 @@ struct CLI {
 		}
 	}
 
-	/// Revert back to original user if sudo
+	/// Revert back to original user if sudo.
 	static func revertSudo() {
 		guard
 			let sudoUIDstring = ProcessInfo.processInfo.environment["SUDO_UID"],
@@ -41,7 +41,7 @@ enum PrintOutputTarget {
 	case standardError
 }
 
-/// Make `print()` accept an array of items
+/// Make `print()` accept an array of items.
 /// Since Swift doesn't support spreading...
 private func print<Target>(
 	_ items: [Any],
