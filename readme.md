@@ -9,6 +9,14 @@ Requires macOS 10.10 or later. macOS 10.13 or earlier needs to download the [Swi
 
 ## Install
 
+###### [Homebrew](https://brew.sh)
+
+```
+$ brew install macos-trash
+```
+
+###### Manually
+
 [Download](https://github.com/sindresorhus/macos-trash/releases/latest) the binary and put it in `/usr/local/bin`.
 
 
