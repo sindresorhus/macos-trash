@@ -6,7 +6,6 @@ Supports [`Put Back`](http://mac-fusion.com/trash-tip-how-to-put-files-back-to-t
 
 Requires macOS 10.10 or later. macOS 10.13 or earlier needs to download the [Swift runtime support libraries](https://support.apple.com/kb/DL1998).
 
-
 ## Install
 
 ###### [Homebrew](https://brew.sh)
@@ -19,13 +18,11 @@ $ brew install macos-trash
 
 [Download](https://github.com/sindresorhus/macos-trash/releases/latest) the binary and put it in `/usr/local/bin`.
 
-
 ## Usage
 
 ```
 $ trash <path> […]
 ```
-
 
 ## Build
 
@@ -33,10 +30,10 @@ $ trash <path> […]
 $ ./build
 ```
 
-
 ## Related
 
 - [trash](https://github.com/sindresorhus/trash) - Cross-platform Node.js version
+- [empty-trash](https://github.com/sindresorhus/empty-trash) - Empty the trash
 - [macos-wallpaper](https://github.com/sindresorhus/macos-wallpaper) - Manage the desktop wallpaper
 - [do-not-disturb](https://github.com/sindresorhus/do-not-disturb) - Control the macOS `Do Not Disturb` feature
 - [More…](https://github.com/search?q=user%3Asindresorhus+language%3Aswift)
