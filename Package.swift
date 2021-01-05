@@ -6,9 +6,9 @@ let package = Package(
 	platforms: [
 		.macOS(.v10_10)
 	],
-        products: [
-                .executable(name: "trash", targets: ["trash"]),
-        ],
+	products: [
+		.executable(name: "trash", targets: ["trash"]),
+	],
 	targets: [
 		.target(
 			name: "trash"

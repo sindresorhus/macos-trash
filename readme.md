@@ -14,6 +14,12 @@ Requires macOS 10.10 or later. macOS 10.13 or earlier needs to download the [Swi
 $ brew install macos-trash
 ```
 
+###### [mint](https://github.com/yonaskolb/Mint)
+
+```
+$ mint install sindresorhus/macos-trash
+```
+
 ###### Manually
 
 [Download](https://github.com/sindresorhus/macos-trash/releases/latest) the binary and put it in `/usr/local/bin`.
