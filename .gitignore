@@ -1,3 +1,4 @@
 /.build
 /*.xcodeproj
 /trash
+/.swiftpm
