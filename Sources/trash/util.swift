@@ -12,6 +12,7 @@ struct CLI {
 	static var standardError = FileHandle.standardError
 
 	static let arguments = Array(CommandLine.arguments.dropFirst(1))
+	static let argumentsWithoutFlag = Array(CommandLine.arguments.dropFirst(2))
 
 	/// Execute code and print to `stderr` and exit with code 1 if it throws.
 	static func tryOrExit(_ throwingFunc: () throws -> Void) {
