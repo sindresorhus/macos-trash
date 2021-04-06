@@ -9,7 +9,9 @@ func trash(paths: [String], verbose: Bool) {
 	for path in paths {
 		let url = URL(fileURLWithPath: path)
 
-		if (verbose) { print(path) }
+		if (verbose) {
+			print(path)
+		}
 
 		CLI.tryOrExit {
 			try FileManager.default.trashItem(at: url, resultingItemURL: nil)
