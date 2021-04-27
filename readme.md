@@ -10,14 +10,14 @@ Requires macOS 10.10 or later. macOS 10.13 or earlier needs to download the [Swi
 
 ###### [Homebrew](https://brew.sh)
 
-```
-$ brew install macos-trash
+```sh
+brew install macos-trash
 ```
 
 ###### [Mint](https://github.com/yonaskolb/Mint)
 
-```
-$ mint install sindresorhus/macos-trash
+```sh
+mint install sindresorhus/macos-trash
 ```
 
 ###### Manually
@@ -26,14 +26,14 @@ $ mint install sindresorhus/macos-trash
 
 ## Usage
 
-```
-$ trash <path> […]
+```sh
+trash <path> […]
 ```
 
 ## Build
 
-```
-$ ./build
+```sh
+./build
 ```
 
 ## Related
