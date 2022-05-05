@@ -2,8 +2,6 @@
 
 > Move files and folders to the trash
 
-Supports [`Put Back`](http://mac-fusion.com/trash-tip-how-to-put-files-back-to-their-original-location/).
-
 Requires macOS 10.10 or later. macOS 10.13 or earlier needs to download the [Swift runtime support libraries](https://support.apple.com/kb/DL1998).
 
 ## Install
