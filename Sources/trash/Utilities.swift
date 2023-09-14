@@ -6,7 +6,7 @@ extension FileHandle: @retroactive TextOutputStream {
 	}
 }
 
-struct CLI {
+enum CLI {
 	static var standardInput = FileHandle.standardInput
 	static var standardOutput = FileHandle.standardOutput
 	static var standardError = FileHandle.standardError
@@ -43,12 +43,12 @@ enum PrintOutputTarget {
 
 /// Make `print()` accept an array of items.
 /// Since Swift doesn't support spreading...
-private func print<Target>(
+private func print(
 	_ items: [Any],
 	separator: String = " ",
 	terminator: String = "\n",
-	to output: inout Target
-) where Target: TextOutputStream {
+	to output: inout some TextOutputStream
+) {
 	let item = items.map { "\($0)" }.joined(separator: separator)
 	Swift.print(item, terminator: terminator, to: &output)
 }
