@@ -2,20 +2,36 @@ import Foundation
 
 let VERSION = "1.2.0"
 
-func trash(paths: [String]) {
+func trash(_ urls: [URL]) {
 	// Ensures the user's trash is used.
 	CLI.revertSudo()
 
-	for path in paths {
-		let url = URL(fileURLWithPath: path)
-
+	for url in urls {
 		CLI.tryOrExit {
 			try FileManager.default.trashItem(at: url, resultingItemURL: nil)
 		}
 	}
 }
 
-switch CLI.arguments.first {
+func prompt(question: String) -> Bool {
+	print(question, terminator: " ")
+
+	guard
+		let input = readLine(),
+		!input.isEmpty
+	else {
+		return false
+	}
+
+	return ["y", "yes"].contains(input.lowercased())
+}
+
+guard let argument = CLI.arguments.first else {
+	print("Specify one or more paths", to: .standardError)
+	exit(1)
+}
+
+switch argument {
 case "--help", "-h":
 	print("Usage: trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]")
 	exit(0)
@@ -23,36 +39,18 @@ case "--version", "-v":
 	print(VERSION)
 	exit(0)
 case "--interactive", "-i":
-	for path in CLI.arguments.dropFirst() {
-		guard FileManager.default.fileExists(atPath: path) else {
-			print("The file “\(path)” doesn’t exist.")
+	for url in (CLI.arguments.dropFirst().map { URL(fileURLWithPath: $0) }) {
+		guard FileManager.default.fileExists(atPath: url.path) else {
+			print("The file “\(url.relativePath)” doesn't exist.")
 			continue
 		}
 
-		print("Move “\(path)” to the trash? ", terminator: "")
-
-		var response = ""
-		while let input = readLine() {
-			guard !input.isEmpty else {
-				exit(0)
-			}
-
-			response = input
-			break
-		}
-
-		switch response {
-		case "y", "yes":
-			trash(paths: [path])
-		default:
+		guard prompt(question: "Trash “\(url.relativePath)”?") else {
 			continue
 		}
+
+		trash([url])
 	}
-
-	exit(0)
-case .none:
-	print("Specify one or more paths", to: .standardError)
-	exit(1)
 default:
-	trash(paths: CLI.arguments)
+	trash(CLI.arguments.map { URL(fileURLWithPath: $0) })
 }
