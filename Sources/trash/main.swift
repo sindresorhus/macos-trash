@@ -33,7 +33,7 @@ case "--interactive", "-i":
 	    while let input = readLine() {
 	        if input == "" {
 	            exit(0)
-            }
+	        }
 	        response = input
 	        break
         }
