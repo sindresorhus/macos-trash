@@ -29,14 +29,14 @@ case "--interactive", "-i":
 	        continue
 	    }
 	    print("Move “\(path)” to the trash? ", terminator: "")
-        var response: String = ""
+	    var response: String = ""
 	    while let input = readLine() {
 	        if input == "" {
 	            exit(0)
 	        }
 	        response = input
 	        break
-        }
+	    }
 	    switch response {
 	    case "y", "yes":
 	        trash(paths: [path])
