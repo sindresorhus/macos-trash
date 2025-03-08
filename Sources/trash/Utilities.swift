@@ -1,6 +1,6 @@
 import Foundation
 
-extension FileHandle: TextOutputStream {
+extension FileHandle: @retroactive TextOutputStream {
 	public func write(_ string: String) {
 		write(string.data(using: .utf8)!)
 	}
