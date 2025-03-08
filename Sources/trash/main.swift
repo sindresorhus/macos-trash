@@ -24,28 +24,31 @@ case "--version", "-v":
 	exit(0)
 case "--interactive", "-i":
 	for path in CLI.arguments.dropFirst() {
-	    if !FileManager.default.fileExists(atPath: path) {
-	        print("The file “\(path)” doesn’t exist.")
-	        continue
-	    }
-	    print("Move “\(path)” to the trash? ", terminator: "")
-	    var response: String = ""
-	    while let input = readLine() {
-	        if input == "" {
-	            exit(0)
-	        }
-	        response = input
-	        break
-	    }
-	    switch response {
-	    case "y", "yes":
-	        trash(paths: [path])
-	    case "n", "no":
-	        continue
-	    default:
-	        continue
-	    }
+		guard FileManager.default.fileExists(atPath: path) else {
+			print("The file “\(path)” doesn’t exist.")
+			continue
+		}
+
+		print("Move “\(path)” to the trash? ", terminator: "")
+
+		var response = ""
+		while let input = readLine() {
+			guard !input.isEmpty else {
+				exit(0)
+			}
+
+			response = input
+			break
+		}
+
+		switch response {
+		case "y", "yes":
+			trash(paths: [path])
+		default:
+			continue
+		}
 	}
+
 	exit(0)
 case .none:
 	print("Specify one or more paths", to: .standardError)
