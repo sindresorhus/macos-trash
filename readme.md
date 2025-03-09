@@ -4,6 +4,8 @@
 
 *Requires macOS 10.13 or later.*
 
+Since macOS 14, there is now a built-in `trash` command. The benefit of the binary here is that it has a `--interactive` flag.
+
 ## Install
 
 ###### [Homebrew](https://brew.sh)
