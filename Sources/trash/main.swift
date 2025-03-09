@@ -1,6 +1,6 @@
 import Foundation
 
-let VERSION = "2.0.0"
+let VERSION = "2.1.0"
 
 func trash(_ urls: [URL]) {
 	// Ensures the user's trash is used.
@@ -33,13 +33,15 @@ guard let argument = CLI.arguments.first else {
 
 switch argument {
 case "--help", "-h":
-	print("Usage: trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]")
+	print("Usage: trash [--help | -h] [--version | -v] [--force | -f] <path> […]")
 	exit(0)
 case "--version", "-v":
 	print(VERSION)
 	exit(0)
-case "--interactive", "-i":
-	for url in (CLI.arguments.dropFirst().map { URL(fileURLWithPath: $0) }) {
+case "--force", "-f":
+	trash(CLI.arguments.dropFirst().map { URL(fileURLWithPath: $0) })
+default:
+	for url in (CLI.arguments.map { URL(fileURLWithPath: $0) }) {
 		guard FileManager.default.fileExists(atPath: url.path) else {
 			print("The file “\(url.relativePath)” doesn't exist.")
 			continue
@@ -51,6 +53,4 @@ case "--interactive", "-i":
 
 		trash([url])
 	}
-default:
-	trash(CLI.arguments.map { URL(fileURLWithPath: $0) })
 }
