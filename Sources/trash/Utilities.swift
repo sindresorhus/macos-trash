@@ -66,8 +66,3 @@ func print(
 		print(items, separator: separator, terminator: terminator, to: &CLI.standardError)
 	}
 }
-
-func safeURL(from path: String) -> URL {
-    let normalizedPath = path.precomposedStringWithCanonicalMapping
-    return URL(fileURLWithPath: normalizedPath)
-}

@@ -7,10 +7,12 @@ func trash(_ urls: [URL]) {
 	CLI.revertSudo()
 
 	for url in urls {
-		CLI.tryOrExit {
-			try FileManager.default.trashItem(at: url, resultingItemURL: nil)
-		}
-	}
+    CLI.tryOrExit {
+        let normalizedPath = url.path.precomposedStringWithCanonicalMapping
+        let normalizedURL = URL(fileURLWithPath: normalizedPath)
+        try FileManager.default.trashItem(at: normalizedURL, resultingItemURL: nil)
+    }
+}
 }
 
 func prompt(question: String) -> Bool {
@@ -52,5 +54,5 @@ case "--interactive", "-i":
 		trash([url])
 	}
 default:
-	trash(CLI.arguments.map { safeURL(from: $0) })
+	trash(CLI.arguments.map { URL(fileURLWithPath: $0) })
 }
