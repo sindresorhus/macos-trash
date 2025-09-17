@@ -51,6 +51,8 @@ case "--interactive", "-i":
 
 		trash([url])
 	}
+case "--":
+	trash(CLI.arguments.dropFirst().map { URL(fileURLWithPath: $0) })
 default:
 	trash(CLI.arguments.map { URL(fileURLWithPath: $0) })
 }
