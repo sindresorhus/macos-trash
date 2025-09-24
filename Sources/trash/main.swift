@@ -65,5 +65,6 @@ case "--interactive", "-i":
 		trash([url])
 	}
 default:
+	// TODO: Use `URL(filePath:` when tarrgeting macOS 15.
 	trash(collectPaths(arguments: CLI.arguments).map { URL(fileURLWithPath: $0) })
 }
