@@ -31,6 +31,19 @@ guard let argument = CLI.arguments.first else {
 	exit(1)
 }
 
+// Handle positionals, at the point when no other flags will be accepted.
+// If there is a leading `--` argument, it will be removed (but not any subsequent `--` arguments).
+func collectPaths(arguments: some Collection<String>) -> any Collection<String> {
+	if
+		arguments.count > 0,
+		arguments[arguments.startIndex] == "--"
+	{
+		return arguments.dropFirst()
+	}
+
+	return arguments
+}
+
 switch argument {
 case "--help", "-h":
 	print("Usage: trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]")
@@ -39,7 +52,7 @@ case "--version", "-v":
 	print(VERSION)
 	exit(0)
 case "--interactive", "-i":
-	for url in (CLI.arguments.dropFirst().map { URL(fileURLWithPath: $0) }) {
+	for url in (collectPaths(arguments: CLI.arguments.dropFirst()).map { URL(fileURLWithPath: $0) }) {
 		guard FileManager.default.fileExists(atPath: url.path) else {
 			print("The file “\(url.relativePath)” doesn't exist.")
 			continue
@@ -52,5 +65,5 @@ case "--interactive", "-i":
 		trash([url])
 	}
 default:
-	trash(CLI.arguments.map { URL(fileURLWithPath: $0) })
+	trash(collectPaths(arguments: CLI.arguments).map { URL(fileURLWithPath: $0) })
 }
