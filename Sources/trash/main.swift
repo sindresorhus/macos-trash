@@ -44,6 +44,29 @@ func collectPaths(arguments: some Collection<String>) -> any Collection<String> 
 	return arguments
 }
 
+// Common rm flags to ignore for compatibility when used as an alias
+let ignoredRmFlags = Set([
+	"-f", "--force",
+	"-r", "-R", "--recursive",
+	"-rf", "-fr", "-Rf", "-fR",
+	"-rR", "-Rr",
+	"-v", "--verbose",
+	"-d", "--dir",
+	"-i", // Interactive handled separately
+	"-I",
+	"-P", "--preserve-root",
+	"--no-preserve-root",
+	"-W", "--whiteout"
+])
+
+// Filter out common rm flags for compatibility
+func filterRmFlags(arguments: some Collection<String>) -> [String] {
+	arguments.filter { arg in
+		// Keep arguments that don't start with - or are not in the ignored list
+		!arg.hasPrefix("-") || !ignoredRmFlags.contains(arg)
+	}
+}
+
 switch argument {
 case "--help", "-h":
 	print("Usage: trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]")
@@ -65,6 +88,11 @@ case "--interactive", "-i":
 		trash([url])
 	}
 default:
+	let paths = filterRmFlags(arguments: Array(collectPaths(arguments: CLI.arguments)))
+	// Exit silently if no paths remain after filtering (e.g., only rm flags were provided)
+	guard !paths.isEmpty else {
+		exit(0)
+	}
 	// TODO: Use `URL(filePath:` when tarrgeting macOS 15.
-	trash(collectPaths(arguments: CLI.arguments).map { URL(fileURLWithPath: $0) })
+	trash(paths.map { URL(fileURLWithPath: $0) })
 }
