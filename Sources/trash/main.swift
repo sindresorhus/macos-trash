@@ -1,6 +1,6 @@
 import Foundation
 
-let VERSION = "2.1.0"
+let VERSION = "2.2.0"
 
 func trash(_ urls: [URL]) {
 	// Ensures the user's trash is used.
