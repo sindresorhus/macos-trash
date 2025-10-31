@@ -31,17 +31,11 @@ guard let argument = CLI.arguments.first else {
 	exit(1)
 }
 
-// Handle positionals, at the point when no other flags will be accepted.
-// If there is a leading `--` argument, it will be removed (but not any subsequent `--` arguments).
-func collectPaths(arguments: some Collection<String>) -> any Collection<String> {
-	if
-		arguments.count > 0,
-		arguments[arguments.startIndex] == "--"
-	{
-		return arguments.dropFirst()
-	}
-
-	return arguments
+// Extract paths from arguments, filtering out flags for `rm` compatibility.
+// Removes leading `--` if present, keeps subsequent `--` as literal paths.
+func extractPaths(from arguments: some Collection<String>) -> [String] {
+	let trimmed = arguments.first == "--" ? Array(arguments.dropFirst()) : Array(arguments)
+	return trimmed.filter { !$0.hasPrefix("-") || $0 == "--" }
 }
 
 switch argument {
@@ -52,7 +46,7 @@ case "--version", "-v":
 	print(VERSION)
 	exit(0)
 case "--interactive", "-i":
-	for url in (collectPaths(arguments: CLI.arguments.dropFirst()).map { URL(fileURLWithPath: $0) }) {
+	for url in extractPaths(from: CLI.arguments.dropFirst()).map({ URL(fileURLWithPath: $0) }) {
 		guard FileManager.default.fileExists(atPath: url.path) else {
 			print("The file “\(url.relativePath)” doesn't exist.")
 			continue
@@ -65,6 +59,11 @@ case "--interactive", "-i":
 		trash([url])
 	}
 default:
-	// TODO: Use `URL(filePath:` when tarrgeting macOS 15.
-	trash(collectPaths(arguments: CLI.arguments).map { URL(fileURLWithPath: $0) })
+	let paths = extractPaths(from: CLI.arguments)
+	guard !paths.isEmpty else {
+		exit(0)
+	}
+
+	// TODO: Use `URL(filePath:` when targeting macOS 15.
+	trash(paths.map { URL(fileURLWithPath: $0) })
 }

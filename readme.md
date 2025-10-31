@@ -30,6 +30,18 @@ mint install sindresorhus/macos-trash
 trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]
 ```
 
+## Tips
+
+### Use it as an `rm` alias
+
+In your `.bashrc` or similar:
+
+```sh
+alias rm='trash'
+```
+
+Works as a drop-in replacement. All `rm` flags are ignored.
+
 ## Build
 
 ```sh
