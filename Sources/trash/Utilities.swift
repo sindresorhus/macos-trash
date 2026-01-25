@@ -1,4 +1,5 @@
 import Foundation
+import SystemConfiguration
 
 extension FileHandle: @retroactive TextOutputStream {
 	public func write(_ string: String) {
@@ -23,16 +24,32 @@ enum CLI {
 		}
 	}
 
-	/// Revert back to original user if sudo.
+	/// Revert back to original user if running as root (via sudo or osascript with administrator privileges).
 	static func revertSudo() {
-		guard
+		// Only proceed if running as root.
+		guard getuid() == 0 else {
+			return
+		}
+
+		// First try SUDO_UID (for regular sudo usage).
+		if
 			let sudoUIDstring = ProcessInfo.processInfo.environment["SUDO_UID"],
 			let sudoUID = uid_t(sudoUIDstring)
+		{
+			setuid(sudoUID)
+			return
+		}
+
+		// Otherwise, get the console user (for osascript with administrator privileges).
+		var uid: uid_t = 0
+		guard
+			SCDynamicStoreCopyConsoleUser(nil, &uid, nil) != nil,
+			uid != 0
 		else {
 			return
 		}
 
-		setuid(sudoUID)
+		setuid(uid)
 	}
 }
 
