@@ -1,10 +1,10 @@
-// swift-tools-version:5.11
+// swift-tools-version:6.2
 import PackageDescription
 
 let package = Package(
 	name: "trash",
 	platforms: [
-		.macOS(.v10_13)
+		.macOS(.v13)
 	],
 	products: [
 		.executable(
@@ -14,7 +14,16 @@ let package = Package(
 			]
 		)
 	],
+	dependencies: [
+		.package(url: "https://github.com/sindresorhus/DSStore", from: "0.1.0")
+	],
 	targets: [
-		.executableTarget(name: "trash")
-	]
+		.executableTarget(
+			name: "trash",
+			dependencies: [
+				"DSStore"
+			]
+		)
+	],
+	swiftLanguageModes: [.v5]
 )
