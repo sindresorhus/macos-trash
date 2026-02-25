@@ -2,7 +2,7 @@
 
 > Move files and folders to the trash
 
-*Requires macOS 10.13 or later.*
+*Requires macOS 13 or later.*
 
 Since macOS 15, there is now a built-in `trash` command. The benefit of the binary here is that it has a `--interactive` flag and it fixes “Put Back” being broken.
 
