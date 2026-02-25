@@ -1,7 +1,7 @@
 import Foundation
 import DSStore
 
-let VERSION = "2.2.0"
+let VERSION = "3.0.0"
 
 struct TrashedFile {
 	let originalURL: URL
