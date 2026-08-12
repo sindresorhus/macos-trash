@@ -23,6 +23,12 @@ let package = Package(
 			dependencies: [
 				"DSStore"
 			]
+		),
+		.testTarget(
+			name: "trashTests",
+			dependencies: [
+				"trash"
+			]
 		)
 	],
 	swiftLanguageModes: [.v5]

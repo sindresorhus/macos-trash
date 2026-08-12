@@ -59,6 +59,18 @@ func trash(_ urls: [URL]) {
 	}
 }
 
+func emptyTrash() throws {
+	CLI.revertSudo()
+
+	try runAppleScript("""
+	tell application "Finder"
+		if (count items of trash) > 0 then
+			empty trash
+		end if
+	end tell
+	""")
+}
+
 /// FileManager.trashItem has a macOS bug where only the first file gets Put Back metadata.
 /// This ensures all trashed files have ptbN/ptbL records in .DS_Store.
 func writeMissingPutBackRecords(for trashedFiles: [TrashedFile]) {
@@ -123,30 +135,24 @@ func prompt(question: String) -> Bool {
 	return ["y", "yes"].contains(input.lowercased())
 }
 
-guard let argument = CLI.arguments.first else {
+switch cliAction(for: CLI.arguments) {
+case .missingArguments:
 	print("Specify one or more paths", to: .standardError)
 	exit(1)
-}
-
-// Extract paths from arguments, filtering out flags for `rm` compatibility.
-// Removes leading `--` if present, keeps subsequent `--` as literal paths.
-func extractPaths(from arguments: some Collection<String>) -> [String] {
-	let trimmed = arguments.first == "--" ? Array(arguments.dropFirst()) : Array(arguments)
-	return trimmed.filter { !$0.hasPrefix("-") || $0 == "--" }
-}
-
-switch argument {
-case "--help", "-h":
-	print("Usage: trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]")
+case .help:
+	print("Usage: trash [--help | -h] [--version | -v] [--interactive | -i] [--empty] <path> […]")
 	exit(0)
-case "--version", "-v":
+case .version:
 	print(VERSION)
-	exit(0)
-case "--interactive", "-i":
+case .empty:
+	CLI.tryOrExit {
+		try emptyTrash()
+	}
+case .interactive:
 	var trashedFiles = [TrashedFile]()
 	var didFail = false
 
-	for url in extractPaths(from: CLI.arguments.dropFirst()).map({ URL(filePath: $0) }) {
+	for url in extractInteractivePaths(from: CLI.arguments).map({ URL(filePath: $0) }) {
 		guard FileManager.default.fileExists(atPath: url.path) else {
 			print("The file “\(url.relativePath)” doesn't exist.")
 			continue
@@ -163,7 +169,7 @@ case "--interactive", "-i":
 
 	writeMissingPutBackRecords(for: trashedFiles)
 	exit(didFail ? 1 : 0)
-default:
+case .trash:
 	let paths = extractPaths(from: CLI.arguments)
 	guard !paths.isEmpty else {
 		exit(0)

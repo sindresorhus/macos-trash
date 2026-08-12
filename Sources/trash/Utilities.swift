@@ -1,6 +1,24 @@
 import Foundation
 import SystemConfiguration
 
+private struct AppleScriptExecutionError: LocalizedError {
+	let errorDescription: String?
+}
+
+func runAppleScript(_ source: String) throws {
+	guard let appleScript = NSAppleScript(source: source) else {
+		throw AppleScriptExecutionError(errorDescription: "Failed to initialize AppleScript.")
+	}
+
+	var errorInfo: NSDictionary?
+	_ = appleScript.executeAndReturnError(&errorInfo)
+
+	if let errorInfo {
+		let message = errorInfo[NSAppleScript.errorMessage] as? String
+		throw AppleScriptExecutionError(errorDescription: message ?? "Failed to execute AppleScript.")
+	}
+}
+
 extension FileHandle: @retroactive TextOutputStream {
 	public func write(_ string: String) {
 		write(string.data(using: .utf8)!)

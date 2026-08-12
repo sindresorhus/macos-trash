@@ -27,7 +27,7 @@ mint install sindresorhus/macos-trash
 ## Usage
 
 ```sh
-trash [--help | -h] [--version | -v] [--interactive | -i] <path> […]
+trash [--help | -h] [--version | -v] [--interactive | -i] [--empty] <path> […]
 ```
 
 ## Tips
